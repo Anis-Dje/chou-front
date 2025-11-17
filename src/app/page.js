@@ -23,21 +23,27 @@ export default function Home() {
     try {
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://chou-xixo.onrender.com';
       await axios.post(`${apiUrl}/api/orders/`, {
-        quantity,
+        quantity: parseInt(quantity, 10),  // Ensure it's an integer
         full_name: fullName,
         phone_number: phoneNumber,
         city,
       });
       setMessage('Order submitted successfully!');
+      // Reset form
+      setQuantity(1);
+      setFullName('');
+      setPhoneNumber('');
+      setCity('');
     } catch (error) {
-      setMessage('Error submitting order.');
+      console.error('Error details:', error.response?.data);
+      setMessage(`Error submitting order: ${error.response?.data?.quantity?.[0] || error.message}`);
     }
   };
 
   return (
     <div style={{ padding: '20px', maxWidth: '600px', margin: 'auto' }}>
       <h1>Product Page</h1>
-      <img src="https://via.placeholder.com/300?text=Widget" alt="Product" style={{ width: '300px' }} />
+      <img src="https://placehold.co/300x300?text=Widget" alt="Product" style={{ width: '300px' }} />
       <p><strong>Price:</strong> 100 DZD</p>
       <p><strong>Description:</strong> This is a cool widget that does amazing things!</p>
       
