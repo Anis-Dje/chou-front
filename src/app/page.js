@@ -23,32 +23,62 @@ export default function Home() {
 
   const translations = {
     en: {
-      title: 'Premium Widget',
+      title: 'Baby Care Essentials Pack',
+      subtitle: 'Everything Your Little One Needs',
       price: 'Price',
-      description: 'This is a cool widget that does amazing things!',
+      description: 'Premium baby care package including ultra-soft diapers, gentle wipes, soothing cream, and more! Safe, comfortable, and perfect for your precious baby.',
       quantity: 'Quantity',
       fullName: 'Full Name',
       phoneNumber: 'Phone Number',
       city: 'City / Wilaya',
       selectCity: 'Select a wilaya',
-      submitOrder: 'Submit Order',
-      orderSuccess: 'Order submitted successfully! 🎉',
+      submitOrder: 'Order Now for My Baby',
+      orderSuccess: 'Order submitted successfully! 🎉 We\'ll take care of your little one!',
       orderError: 'Error submitting order. Please try again.',
-      features: ['High Quality', 'Fast Delivery', 'Money Back Guarantee'],
+      features: [
+        '✨ Ultra-Soft & Gentle',
+        '🌿 Dermatologically Tested',
+        '💝 Safe for Sensitive Skin',
+        '🚚 Fast & Free Delivery',
+        '✅ 100% Baby-Safe Materials'
+      ],
+      badge: 'Perfect for Newborns',
+      packIncludes: 'Pack Includes:',
+      items: [
+        '🍼 Premium Diapers (Size 1-3)',
+        '🧻 Gentle Baby Wipes',
+        '🧴 Soothing Baby Cream',
+        '🧸 Bonus Baby Care Guide'
+      ]
     },
     ar: {
-      title: 'منتج مميز',
+      title: 'حزمة العناية بالطفل الأساسية',
+      subtitle: 'كل ما يحتاجه طفلك الصغير',
       price: 'السعر',
-      description: 'هذا منتج رائع يقوم بأشياء مذهلة!',
+      description: 'حزمة عناية متكاملة بالطفل تشمل حفاضات فائقة النعومة، مناديل لطيفة، كريم مهدئ والمزيد! آمنة ومريحة ومثالية لطفلك الثمين.',
       quantity: 'الكمية',
       fullName: 'الاسم الكامل',
       phoneNumber: 'رقم الهاتف',
       city: 'الولاية',
       selectCity: 'اختر ولاية',
-      submitOrder: 'إرسال الطلب',
-      orderSuccess: 'تم إرسال الطلب بنجاح! 🎉',
+      submitOrder: 'اطلب الآن لطفلي',
+      orderSuccess: 'تم إرسال الطلب بنجاح! 🎉 سنعتني بطفلك الصغير!',
       orderError: 'خطأ في إرسال الطلب. يرجى المحاولة مرة أخرى.',
-      features: ['جودة عالية', 'توصيل سريع', 'ضمان استرجاع المال'],
+      features: [
+        '✨ ناعم جداً ولطيف',
+        '🌿 مختبر جلدياً',
+        '💝 آمن للبشرة الحساسة',
+        '🚚 توصيل سريع ومجاني',
+        '✅ مواد آمنة 100٪ للأطفال'
+      ],
+      badge: 'مثالي لحديثي الولادة',
+      packIncludes: 'الحزمة تتضمن:',
+      items: [
+        '🍼 حفاضات فاخرة (المقاس 1-3)',
+        '🧻 مناديل مبللة لطيفة',
+        '🧴 كريم مهدئ للأطفال',
+        '🧸 دليل العناية بالطفل مجاناً'
+      ]
     },
   };
 
@@ -104,32 +134,41 @@ export default function Home() {
         <div className="product-image-section">
           <div className="product-image-container">
             <img 
-              src="https://click-dz.com/wp-content/uploads/2024/01/Xiaomi-Mi-TV-Box-S-2nd-1.jpg" 
-              alt="Product" 
+              src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=600&h=600&fit=crop" 
+              alt="Baby Care Products" 
               className="product-image"
             />
-            <div className="badge">🔥 {language === 'ar' ? 'عرض حصري' : 'Hot Deal'}</div>
+            <div className="badge">� {t.badge}</div>
           </div>
         </div>
 
         {/* Product Info Section */}
         <div className="product-info">
           <h1 className="product-title">{t.title}</h1>
+          {t.subtitle && <p className="product-subtitle">{t.subtitle}</p>}
           
           <div className="price-section">
-            <span className="price">100 DZD</span>
+            <span className="price">2,500 DZD</span>
             <span className="price-label">{t.price}</span>
+            <span className="discount">3,500 DZD</span>
           </div>
 
           <p className="description">{t.description}</p>
+
+          {/* Pack Includes Section */}
+          <div className="pack-includes">
+            <h3>{t.packIncludes}</h3>
+            <ul>
+              {t.items.map((item, index) => (
+                <li key={index}>{item}</li>
+              ))}
+            </ul>
+          </div>
 
           {/* Features */}
           <div className="features">
             {t.features.map((feature, index) => (
               <div key={index} className="feature-item">
-                <svg className="check-icon" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                </svg>
                 <span>{feature}</span>
               </div>
             ))}
