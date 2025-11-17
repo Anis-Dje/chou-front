@@ -21,7 +21,8 @@ export default function Home() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('https://your-render-domain.com/api/orders/', {  // Replace with your Render URL
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://chou-xixo.onrender.com';
+      await axios.post(`${apiUrl}/api/orders/`, {
         quantity,
         full_name: fullName,
         phone_number: phoneNumber,
