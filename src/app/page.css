@@ -485,6 +485,7 @@ body {
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
+  width: 100%;
 }
 
 .quantity-selector input {
@@ -492,11 +493,13 @@ body {
   text-align: center;
   font-weight: 700;
   font-size: 1.2rem;
+  min-width: 0; /* Important for flexbox */
 }
 
 .qty-btn {
   width: 48px;
   height: 48px;
+  min-width: 48px; /* Prevent shrinking */
   border: 2px solid var(--primary-pink);
   background: var(--white);
   color: var(--primary-pink);
@@ -770,6 +773,15 @@ body {
     padding: 1rem;
     font-size: 1rem;
   }
+
+  .quantity-selector {
+    gap: 0.5rem;
+  }
+
+  .quantity-selector input {
+    font-size: 1.1rem;
+    padding: 0.75rem 0.5rem;
+  }
 }
 
 /* Small Mobile (max-width: 480px) */
@@ -791,8 +803,19 @@ body {
   }
 
   .qty-btn {
-    width: 42px;
-    height: 42px;
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    font-size: 1.3rem;
+  }
+
+  .quantity-selector {
+    gap: 0.4rem;
+  }
+
+  .quantity-selector input {
+    font-size: 1rem;
+    padding: 0.65rem 0.4rem;
   }
 }
 
@@ -812,6 +835,22 @@ body {
 
   .price {
     font-size: 1.5rem;
+  }
+
+  .qty-btn {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    font-size: 1.2rem;
+  }
+
+  .quantity-selector {
+    gap: 0.3rem;
+  }
+
+  .quantity-selector input {
+    font-size: 0.95rem;
+    padding: 0.6rem 0.3rem;
   }
 }
 

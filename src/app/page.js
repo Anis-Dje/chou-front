@@ -183,6 +183,7 @@ export default function Home() {
                   type="button" 
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
                   className="qty-btn"
+                  aria-label="Decrease quantity"
                 >
                   -
                 </button>
@@ -190,13 +191,27 @@ export default function Home() {
                   type="number" 
                   min="1" 
                   value={quantity} 
-                  onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))} 
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    if (value === '' || value === '0') {
+                      setQuantity('');
+                    } else {
+                      setQuantity(parseInt(value) || 1);
+                    }
+                  }}
+                  onBlur={(e) => {
+                    if (e.target.value === '' || parseInt(e.target.value) < 1) {
+                      setQuantity(1);
+                    }
+                  }}
                   required 
+                  inputMode="numeric"
                 />
                 <button 
                   type="button" 
-                  onClick={() => setQuantity(quantity + 1)}
+                  onClick={() => setQuantity(prev => (parseInt(prev) || 0) + 1)}
                   className="qty-btn"
+                  aria-label="Increase quantity"
                 >
                   +
                 </button>
