@@ -86,17 +86,34 @@ export default function Home() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Ensure quantity is a valid number before proceeding
+    const validQuantity = parseInt(quantity) || 1;
+    
+    // Update quantity state if it was empty
+    if (quantity === '' || quantity === 0) {
+      setQuantity(1);
+    }
+    
     setIsLoading(true);
     setMessage('');
     
+    console.log('Submitting order:', {
+      quantity: validQuantity,
+      full_name: fullName,
+      phone_number: phoneNumber,
+      city
+    });
+    
     try {
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://chou-xixo.onrender.com';
-      await axios.post(`${apiUrl}/api/orders/`, {
-        quantity: parseInt(quantity, 10),
+      const response = await axios.post(`${apiUrl}/api/orders/`, {
+        quantity: validQuantity,
         full_name: fullName,
         phone_number: phoneNumber,
         city,
       });
+      console.log('Order success:', response.data);
       setMessage(t.orderSuccess);
       // Reset form
       setQuantity(1);
@@ -104,6 +121,7 @@ export default function Home() {
       setPhoneNumber('');
       setCity('');
     } catch (error) {
+      console.error('Error submitting order:', error);
       console.error('Error details:', error.response?.data);
       setMessage(t.orderError);
     } finally {
@@ -193,14 +211,18 @@ export default function Home() {
                   value={quantity} 
                   onChange={(e) => {
                     const value = e.target.value;
-                    if (value === '' || value === '0') {
+                    if (value === '') {
                       setQuantity('');
                     } else {
-                      setQuantity(parseInt(value) || 1);
+                      const numValue = parseInt(value);
+                      if (!isNaN(numValue) && numValue > 0) {
+                        setQuantity(numValue);
+                      }
                     }
                   }}
                   onBlur={(e) => {
-                    if (e.target.value === '' || parseInt(e.target.value) < 1) {
+                    const value = e.target.value;
+                    if (value === '' || parseInt(value) < 1 || isNaN(parseInt(value))) {
                       setQuantity(1);
                     }
                   }}
